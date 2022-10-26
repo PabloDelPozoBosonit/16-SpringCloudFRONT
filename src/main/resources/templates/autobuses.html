@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Autobuses Bosonit</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+            integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+            integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+            integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+            crossorigin="anonymous"></script>
+    <style>
+      body{
+            background-color:#E5ABEE;
+            font-weight: bold;
+      }
+
+      #cajaPadre {
+        display: flex;
+        justify-content: space-between;
+      }
+
+         #tituloPincipal {
+           font-size: 60px;
+           color : #6C3375;
+           text-align: center;
+          }
+     .Title {
+                  display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 50%;
+                     text-align: center;
+
+                }
+
+          #contenedorClientes{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 30%;
+                }
+
+          .general{
+                border: solid 5px;
+           }
+  #formularioClientes{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                   #botonesClientes{
+                    display: flex;
+                    padding: 5px;
+                    flex-direction: row;
+                    align-self: center;
+                    border-bottom: 0px;
+                }
+
+                    #contenedorAdministrador{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 30%;
+                }
+
+                     #formularioViajes{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                #botonesViajes{
+                    display: flex;
+                    padding: 5px;
+                    border-bottom: 0px;
+                    flex-direction: row;
+                    align-self: center;
+                }
+
+
+                   #contenedorGestionAdmin {
+                        display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 100%;
+                    border-bottom: 0px;
+                    border-left: 0px;
+                    border-right: 0px;
+
+                }
+
+                 #formularioAdministradorClientes{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                #botonesAdministradorClientes{
+                    display: flex;
+                    padding: 5px;
+                    flex-direction: row;
+                    align-self: center;
+                }
+
+
+                  #formularioAdministradorViajes{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                #botonesAdministradorViajes{
+                    display: flex;
+                    padding: 5px;
+                    border-bottom: 0px;
+                    flex-direction: row;
+                    align-self: center;
+                }
+
+
+                label{
+                    float: right;
+                    vertical-align: middle;
+                    line-height: 1.8;
+                }
+
+                input{
+                    float: right;
+                    width: 45%;
+                    margin: 2px;
+                    line-height: 1.2;
+                }
+
+
+    </style>
+</head>
+<body>
+
+<h1 id="tituloPincipal">AUTOBUSES BOSONIT</h1>
+<div id="cajaPadre">
+
+    <div class="general" id="contenedorClientes">
+        <div class="Title"><h1>Registrate con nosotros</h1></div>
+        <form id="formularioClientes">
+            <label>Nombre<input type="text" id="name"/></label>
+            <label>Apellido<input type="text" id="surname"/></label>
+            <label>Edad<input type="number" id="age"/></label>
+            <label>Email<input type="email" id="email"/></label>
+            <label>Telefono <input type="tel" id="tlfno"/> </label>
+
+            <div class="general" id="botonesClientes">
+                <input type="submit" onclick="submitPersona(event)"/>
+                <input type="reset" onclick="resetForm()" value="Limpiar"/>
+            </div>
+        </form>
+
+        <div class="general" id ="contenedorTicket">
+            <form id ="formularioTicket">
+                <h3>Una vez registrado...</h3>
+                <label>Id del viaje<input type="number" id="idTripToAdd"/></label>
+                <label>Id del Cliente<input type="number" id="idPassenger"/></label>
+                <div>
+                    <input type="submit" value="Crear ticket" onclick="generateTicket(event)"/>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="general" id="contenedorAdministrador">
+
+        <div class="Title"><h1>Menu administrador</h1></div>
+        <div class="Title"><h2>Crea viaje</h2></div>
+        <form id="formularioViajes">
+            <label>Origen<input type="text" id="origin"/></label>
+            <label>Destino<input type="text" id="destination"/></label>
+            <label>Fecha de salida<input type="date" id="departureDate"/></label>
+            <label>Fecha de llegada<input type="date" id="arrivalDate"/></label>
+
+            <div class="general" id="botonesViajes">
+                <input type="submit" onclick="submitViaje(event)"/>
+                <input type="reset" onclick="resetForm()" value="Limpiar"/>
+            </div>
+        </form>
+
+
+        <div class="general" id="contenedorGestionAdmin">
+            <div class="Title"><h2>Clientes</h2></div>
+            <form id="formularioAdministradorClientes">
+                <label>Id<input type="number" id="idClient"/></label>
+
+                <div class="general" id="botonesAdministradorClientes">
+                    <input type="button" value="Buscar por id" onclick="findById(event)"/>
+                    <input type="submit" value="Obtener todos los clientes" onclick="obtenerClientes(event)"/>
+                    <input type="submit" value="Eliminar por id" onclick="submitPersona(event)"/>
+                </div>
+            </form>
+
+            <div class="Title"><h2>Viajes</h2></div>
+            <form id="formularioAdministradorViajes">
+                <label>Id<input type="number" id="idTrip"/></label>
+
+                <div class="general" id="botonesAdministradorViajes">
+                    <input type="submit" value="Buscar por id" onclick="submitPersona(event)"/>
+                    <input type="submit" value="Obtener todos los viajes" onclick="submitPersona(event)"/>
+                    <input type="submit" value="Eliminar por id" onclick="submitPersona(event)"/>
+                    <input type="submit" value="Contar pasajeros" onclick="submitPersona(event)"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+            const formulario = document.getElementById('formulario');
+            const body = document.body;
+
+            function submitPersona(evento){
+                console.log(evento);
+                fetch('http://localhost:8081/client',{
+                method:'post',
+                headers:{"Content-Type": "application/json"},
+                body:JSON.stringify({
+                    'name': document.getElementById('name').value,
+                    'surname': document.getElementById('surname').value,
+                    'age': document.getElementById('age').value,
+                    'email': document.getElementById('email').value,
+                    'telf': document.getElementById('tlfno').value
+                })
+            })
+              .then(function(response){ return response.json()})
+              .then( evento.preventDefault())
+
+              resetForm();
+            }
+
+
+
+            const formularioViajes = document.getElementById('formularioViajes');
+
+            function submitViaje(event){
+                console.log(event);
+                fetch('http://localhost:8081/trip',{
+                method:'post',
+                headers:{"Content-Type": "application/json"},
+                body:JSON.stringify({
+                    'origin': document.getElementById('origin').value,
+                    'destination': document.getElementById('destination').value,
+                    'departureDate': document.getElementById('departureDate').value,
+                    'arrivalDate': document.getElementById('arrivalDate').value,
+                })
+            })
+              .then(function(response){ return response.json()})
+              .then( evento.preventDefault())
+
+              resetForm();
+            }
+
+
+
+            const formularioTickets = document.getElementById('formularioTicket');
+
+            function generateTicket(event){
+
+                console.log(event);
+                fetch('http://localhost:8081/trip/addPassenger', {
+                     method:'post',
+                     headers:{"Content-Type": "application/json"},
+                body:JSON.stringify({
+                    'idTripToAdd': document.getElementById('idTripToAdd').value,
+                    'idPassenger': document.getElementById('idPassenger').value,
+
+                })
+            })
+              .then(function(response){ return response.json()})
+              .then( evento.preventDefault())
+
+              resetForm();
+            }
+
+
+
+
+            const formularioAdministradorClientes = document.getElementById('formularioAdministradorClientes');
+
+                function findById(event){
+
+                        const url = "https://localhost:8081/client/getAll";
+                        console.log('dataURL: ' + url);
+                        const estructuras = [];
+                        const request = new XMLHttpRequest();
+                        request.open("GET",url);
+                        request.onload = function() {
+                            const dato = JSON.parse(this.responseText);
+                            dato.forEach(s => {
+                                estructuras.push(`${s.idClient} (${s.name}) (${s.surname}) (${s.age}) (${s.email}) (${s.telf})`);
+                            });
+                            muestraResultado(estructuras.join(' <br>'));
+                        }
+                        request.onerror = (error) => muestraResultado(`<pre>ERROR: ${error}</pre>`);
+                        request.send();
+                        const muestraResultado = (texto) => document.getElementById('output').innerHTML = texto;
+                }
+
+
+</script>
+</body>
+</html>
